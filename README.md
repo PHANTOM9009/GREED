@@ -1,6 +1,5 @@
 
-![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image3.png)
-![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image.png)
+
 
 # About the game:
 
@@ -10,6 +9,9 @@ by writing efficient and smart algorithms.
 
 This game is a powerful set of API's and graphics that enable you to write AI/ML algorithms in C++ to compete 
 against other algorithms.
+
+![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image3.png)
+
 
 ## Concept:
 
