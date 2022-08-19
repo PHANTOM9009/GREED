@@ -1,4 +1,4 @@
-![](map_1 attributes/image.png)
+![Game view](/map_1 attributes/image.png)
 
 # About the game:
 
