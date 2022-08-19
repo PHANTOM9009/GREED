@@ -1,3 +1,5 @@
+![](map_1 attributes/image.png)
+
 # About the game:
 
 you must have played many games against each other or against computers, but ever wondered how two computers will
