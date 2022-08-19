@@ -23,6 +23,8 @@ Steps to play the game:
 
 for more details refer to:
 1. [Notes](Notes.md)
+2. [Rules](Rules.md)
+3. [Documentation](Documentation.md)
 
 
 
