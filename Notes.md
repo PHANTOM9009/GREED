@@ -169,7 +169,7 @@ Events like fire are not included in this queue because they are not continous a
 
 
 usage of this is as follows:
-while(1)
+```while(1)
 {
 	Sleep(50);
  deque<Event> q = ob.getPassiveEvent(); //to get the passive event queue
@@ -189,6 +189,8 @@ while(1)
 			
 		}
 }
+
+```
 The above code will fire on the ship untill it is in its radius.
 
 
