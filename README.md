@@ -1,4 +1,4 @@
-![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/main_img.png)
+
 ![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image3.png)
 ![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image.png)
 
