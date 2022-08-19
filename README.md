@@ -21,7 +21,8 @@ Steps to play the game:
 1. download the entire package/zip file from the github repository.
 2. double click the  GREED.exe application to launch the game.
 
-for more details refer to the Notes and documentation section.
+for more details refer to:
+1. [Notes](Notes.md)
 
 
 
