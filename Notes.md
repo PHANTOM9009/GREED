@@ -12,7 +12,7 @@ the row increases. The maximum value of the row is 11 and of column is 23. Where
 is made of land hence ship can't be placed there. so the movable coords in the map varies from (0,0) to (10,23)
 as depicted in the picture below.
 
-<insert the image of the map depicting the rows and column with written row and column>
+![picture](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image2.png)
 
 elements of the Map:
 
