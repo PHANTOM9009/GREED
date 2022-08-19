@@ -1,4 +1,4 @@
-![Game view](https://github.com/PHANTOM9009/GREED/map_1 attributes/image.png)
+![Game view]("https://github.com/PHANTOM9009/GREED/map_1 attributes/image.png")
 
 # About the game:
 
