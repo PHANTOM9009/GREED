@@ -32,3 +32,15 @@
 3. ammo: 50
 4. power of the bullet: 5
 5. health: 200
+
+## Conversion rules:
+  
+   1. Gold to Fuel: call the function "ship::upgradeFuel(int n)" to increase the fuel in lieu of Gold.
+   	1 Fuel is equal to 5 Gold coins.
+   2. Gold to Health: call the function "ship::upgradeHealth(int n)" to increase the Health in lieu of Gold.
+    	1 Health is equal to 5 Gold coins.
+	
+   3. Gold to Ammo: call the function "ship::upgradeAmmo(int n)" to increase the Ammo in lieu of Gold.
+    	1 Ammo is equal to 1 Gold coin.
+   	
+ 
