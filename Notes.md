@@ -82,18 +82,16 @@ The best way to learn more about this function is to try it out!
 
 ## 3. Concept of radius of the ship in the Map:
 
-	The area in which the ship can fire is its radius. The concept of Radius is twofold:
+   The area in which the ship can fire is its radius. The concept of Radius is twofold:
 
-	The ship can be at either of the two places:
-	1. Lying completely on a tile. 
-		In this case the radius of the ship will be 2 tiles as clearly shown in the picture
-
-	2. Ship is lying on two tiles.
-		in this case the ship will have a front radius and rear radius, as depicted in the image
+   The ship can be at either of the two places:
+	1. Lying completely on a tile.In this case the radius of the ship will be 2 tiles as clearly shown in the picture
+ 
+        2. Ship is lying on two tiles.in this case the ship will have a front radius and rear radius, as depicted in the image
 
 
 
-     <insert the image showing the concept of radius>
+    ![image](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/radius.png)
 ## 4. Firing:
 	Every ship has 2 cannons attached, one at the front and another at the rear. You can fire from any one of them at a time.
 
