@@ -91,7 +91,7 @@ The best way to learn more about this function is to try it out!
 
 
 
-    ![image](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/radius.png)
+   ![image](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/radius.png)
 ## 4. Firing:
 	Every ship has 2 cannons attached, one at the front and another at the rear. You can fire from any one of them at a time.
 
