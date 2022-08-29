@@ -18,6 +18,7 @@
 #include<TGUI/Backend/SFML-Graphics.hpp>
 #include<TGUI/TGUI.hpp>
 
+
 #pragma once
 
 #define columns 24
@@ -46,7 +47,10 @@
 */
 int cx(int x);
 int cy(int y);
-
+int rx(int x);
+int ry(int y);
+void resizeImage(sf::Image& img, sf::Image& img1);
+void resizeTexture(sf::Texture& tex);
 //universal function for finding stuff from the list, pass the list and the element to be found and get the index
 template<typename Y>
 int getIndex(List<Y>& l, Y val);
@@ -467,6 +471,16 @@ private:
 		this->target_cannon = target_cannon;
 	}
 public:
+	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+
+	int cx(int x)
+	{
+		return round(((x * modes[0].width) / 1920));
+	}
+	int cy(int y)
+	{
+		return round(((y * modes[0].height) / 1080));
+	}
 	bullet()
 	{
 		ttl = 0;
@@ -477,7 +491,7 @@ public:
 		isActive = false;//a bullet will become active soon after its initialized
 		slope = -1;
 		isSuccess = -1;
-		bullet_entity.setRadius(5);
+		bullet_entity.setRadius((this->cx(5) + this->cy(5))/2);
 		bullet_entity.setFillColor(sf::Color::Black);
 		hit_ship = -1;
 		target_cannon = -1;
@@ -568,7 +582,7 @@ private:
 	void filter(List<Greed::abs_pos>& ob);
 	void graphic_initializer(sf::Texture& tex, sf::Vector2f position)//tex is the initial texture of the cannon
 	{
-		cannon_sprite.setOrigin(40, 40);
+		cannon_sprite.setOrigin(cx(40), cy(40));
 		cannon_sprite.setTexture(tex);
 		cannon_sprite.setPosition(position);
 
@@ -1041,7 +1055,7 @@ private:
 	//armory of the ship
 public: //this will be public the user will be able to access this object freely
 	//object 
-
+	List<Greed::abs_pos> path;
 	double threshold_health;
 	double threshold_ammo;
 	double threshold_fuel;
@@ -1104,7 +1118,7 @@ private:
 	int autopilot = 0;//bit to check if the ship is moving in autopilot or not
 
 
-	List<Greed::abs_pos> path;
+	
 	List<Greed::vertex> localMap;
 	deque<shipInfo> shipInfoList;
 
@@ -1183,7 +1197,7 @@ public:
 	void graphics_initializer(sf::Texture& tex)
 	{
 		rect.setTexture(tex);
-		rect.setPosition(getCurrentTile().c * 80 + origin_x, getCurrentTile().r * 80 + origin_y);
+		rect.setPosition(cx(getCurrentTile().c * 80 + origin_x), cy(getCurrentTile().r * 80 + origin_y));
 
 	}
 	static List<Greed::vertex>& getGlobalMapref(int key)//to be used only once in main only
@@ -1903,14 +1917,7 @@ public:
 		void frame(double elapsed_time, sf::Sprite& sp);
 		friend graphics;
 	};
-	double cx(double x)//callibration functions for x and y
-	{
-		return x + origin_x;
-	}
-	double cy(double y)
-	{
-		return y + origin_y;
-	}
+
 	bool checkCollision(int sid, const Greed::bullet& ob);
 	static long double getTotalTime();
 	bool check_game_over(deque<ship*>& pl1);
