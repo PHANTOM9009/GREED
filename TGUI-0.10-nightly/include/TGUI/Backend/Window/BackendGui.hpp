@@ -596,7 +596,7 @@ namespace tgui
 
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Updates the view and changes the size of the root container when needed.
-        // Derived classes should updat the m_windowSize member in this function and then call this function from the base class.
+        // Derived classes should update m_framebufferSize in this function and then call this function from the base class.
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         virtual void updateContainerSize();
 
@@ -619,9 +619,9 @@ namespace tgui
         Duration m_tooltipTime;
         bool m_tooltipPossible = false;
         Vector2f m_toolTipRelativePos;
-        Vector2f m_lastMousePos;
+        Vector2i m_lastMousePos;
 
-        Vector2i m_windowSize;
+        Vector2i m_framebufferSize;
         RelFloatRect m_viewport{RelativeValue{0}, RelativeValue{0}, RelativeValue{1}, RelativeValue{1}};
         RelFloatRect m_view{RelativeValue{0}, RelativeValue{0}, RelativeValue{1}, RelativeValue{1}};
         FloatRect m_lastView;

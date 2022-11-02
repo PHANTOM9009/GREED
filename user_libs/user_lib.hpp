@@ -4,6 +4,7 @@
 #include<mutex>
 #include<math.h>
 #include<string>
+#include<SFML/Graphics.hpp>
 #include<Windows.h>
 #include<fstream>
 #include<list>
@@ -14,6 +15,9 @@
 #include<deque>
 #include<unordered_map>
 #include<windows.h>
+#include<TGUI/Backend/SFML-Graphics.hpp>
+#include<TGUI/TGUI.hpp>
+#include<chrono>
 
 
 #pragma once
@@ -44,7 +48,10 @@
 */
 int cx(int x);
 int cy(int y);
-
+int rx(int x);
+int ry(int y);
+void resizeImage(sf::Image& img, sf::Image& img1);
+void resizeTexture(sf::Texture& tex);
 //universal function for finding stuff from the list, pass the list and the element to be found and get the index
 template<typename Y>
 int getIndex(List<Y>& l, Y val);
@@ -83,20 +90,20 @@ enum  class Bonus
 class attribute//attribute of the tile i.e what does the tile have: storm, bonus,land,cannons,ship ///  a list of the objects of this class will be returned.
 {
 protected:
-	Entity entity;//whats the thing? is it a ship,bonus or etc
+
 	double cost;//in case of a water or storm only
 	int ship_id;// if its a ship
 	int cannon_id;//if its a cannon
-	Bonus bonus;//type of bonus, if a bonus.
-	void update(Entity ent, double c, int sid, int cid, Bonus b, int key)
+
+	void update(double c, int sid, int cid, int key)
 	{
 		if (key == 2369)
 		{
-			entity = ent;
+
 			cost = c;
 			ship_id = sid;
 			cannon_id = cid;
-			bonus = b;
+
 		}
 	}
 	void updateShipStatus(int sid, int key)
@@ -110,25 +117,22 @@ public:
 
 	attribute()
 	{
-		entity = Entity::NA;
+
 		cost = -1;
 		ship_id = -1;
 		cannon_id = -1;
-		bonus = Bonus::NA;
+
 	}
-	attribute(Entity ent, double c, int sid, int cid, Bonus b)// ent=NA,c=-1,id=-1,b=NA if any of these doesnt exists
+	attribute(Entity ent, double c, int sid, int cid)// ent=NA,c=-1,id=-1,b=NA if any of these doesnt exists
 	{
-		entity = ent;
+
 		cost = c;
 		ship_id = sid;
 		cannon_id = cid;
-		bonus = b;
+
 	}
 
-	Entity getEntity()
-	{
-		return entity;
-	}
+
 	double getCost()
 	{
 		return cost;
@@ -137,9 +141,9 @@ public:
 	{
 		return ship_id;
 	}
-	Bonus getBonus()
+	int getCannonId()
 	{
-		return bonus;
+		return cannon_id;
 	}
 	friend ship;
 
@@ -366,7 +370,7 @@ class Mutex//class protecting all the mutexes
 	mutex m[20];//mutex for the ship
 	mutex timeMutex[20];//mutex for protecting the data structure of timeline
 	mutex updateTime;//mutex for updating and reading total time of the game
-///mutex m is for protecting the path data structure
+	///mutex m is for protecting the path data structure
 	mutex event_mutex[20];
 	mutex mchase[20];//mutex for follow up function of ship class
 
@@ -389,11 +393,7 @@ public:
 };
 class Greed::bullet
 {
-	int ttl;
-	bool hit_or_not;
-	
-	Mutex* mutx;//mutex m will be locked
-	int mid;//mutex id which is same as ship_id
+public:
 	int id;
 	double power;//power of the bullet
 	double damage;
@@ -404,16 +404,26 @@ class Greed::bullet
 	int target_cannon;//if the target is cannon then id of cannon is stored else -1
 	int hit_cannon;
 	bool isActive;//is the bullet active
-	double slope;
 	bool isSuccess;//if the bullet hit the target
+	::cannon can;//side of the firing ship
+	ShipSide s;//side of the enemy ship
+private:
+
+	int ttl;
+	bool hit_or_not;
+	sf::CircleShape bullet_entity;//bullet entity is here
+	Mutex* mutx;//mutex m will be locked
+	int mid;//mutex id which is same as ship_id
+
+	double slope;
+
 	Greed::coords starting_tile;//tile from where the bullet started
 	Greed::coords ending_tile;//tile where the bullet will end
 	Greed::coords some1;
 	int some2;
-	::cannon can;//side of the firing ship
-	ShipSide s;//side of the enemy ship
+
 	vector<Greed::abs_pos> bullet_trajectory;// this is for setting the bullet position in the world
-   // List<Greed::abs_pos> bullet_trajectory_cont;//traces the trajectory of the bullet
+	// List<Greed::abs_pos> bullet_trajectory_cont;//traces the trajectory of the bullet
 
 	void set_after_data(double dam, int hit_ship, bool isA)//set_after_data for ship to ship fire
 	{
@@ -462,6 +472,16 @@ class Greed::bullet
 		this->target_cannon = target_cannon;
 	}
 public:
+	vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+
+	int cx(int x)
+	{
+		return round(((x * modes[0].width) / 1920));
+	}
+	int cy(int y)
+	{
+		return round(((y * modes[0].height) / 1080));
+	}
 	bullet()
 	{
 		ttl = 0;
@@ -472,7 +492,8 @@ public:
 		isActive = false;//a bullet will become active soon after its initialized
 		slope = -1;
 		isSuccess = -1;
-		
+		bullet_entity.setRadius((this->cx(5) + this->cy(5)) / 2);
+		bullet_entity.setFillColor(sf::Color::Black);
 		hit_ship = -1;
 		target_cannon = -1;
 		hit_cannon = -1;
@@ -519,8 +540,30 @@ public:
 };
 class Greed::cannon//no need to lock this class with any mutex, no concurrency is performed here
 {
+public:
+	int getCannonId()
+	{
+		return cannon_id;
+	}
+	double getCannonHealth()
+	{
+		return health;
+	}
+	Greed::coords getCannonPosition()
+	{
+		return tile;
+	}
+	double getCannonMoney()
+	{
+		return money;
+	}
+	bool isCannonDead()
+	{
+		return isDead;
+	}
+
 private:
-	
+	sf::Sprite cannon_sprite;
 	int cannon_id;
 	double health;
 	Greed::coords tile;
@@ -536,7 +579,26 @@ private:
 	ShipSide ss;
 	vector<Greed::bullet> bullet_list;
 	List<Greed::bullet> allBullets;
+
 	void filter(List<Greed::abs_pos>& ob);
+	void graphic_initializer(sf::Texture& tex, sf::Vector2f position)//tex is the initial texture of the cannon
+	{
+		cannon_sprite.setOrigin(cx(40), cy(40));
+		cannon_sprite.setTexture(tex);
+		cannon_sprite.setPosition(position);
+
+	}
+	void initializer(int cid, Greed::coords tile)
+	{
+		cannon_id = cid;
+		this->tile = tile;
+		absolute_position = Greed::abs_pos((int)tile.c * len / 2, (int)tile.r * len / 2);
+	}
+	bool isShipInMyRadius(int s_id, ShipSide myside);
+	int getVictimShip();
+	bool fireCannon(int s_id);
+
+	double get_required_angle();
 public:
 
 	Greed::coords getCannonTile()
@@ -554,18 +616,7 @@ public:
 		current_angle = 0;
 		current_ship = -1;
 	}
-	
-	void initializer(int cid, Greed::coords tile)
-	{
-		cannon_id = cid;
-		this->tile = tile;
-		absolute_position = Greed::abs_pos((int)tile.c * len / 2, (int)tile.r * len / 2);
-	}
-	bool isShipInMyRadius(int s_id, ShipSide myside);
-	int getVictimShip();
-	bool fireCannon(int s_id);
 
-	double get_required_angle();
 	friend graphics;
 	friend int main();
 	friend class ship;
@@ -650,6 +701,8 @@ public:
 	Direction getShipDirection();
 	Greed::coords getCurrentTile();
 	Greed::coords getCurrentRearTile();
+	Greed::abs_pos getRealAbsolutePosition();
+
 	friend class ship;
 
 
@@ -713,7 +766,7 @@ public:
 	{
 		map_id = mid;
 	}
-	
+	void intialize_graphics(sf::Texture& tex);
 	void initialize_map(int code[12][24], List<Greed::coords>& opaque);//list of opaque tiles
 };
 ///////////////class for timeline/////////////////////////////////
@@ -770,10 +823,10 @@ class Event
 
 	long event_id;
 	int sid;//sid represents the id of the ship for which an event is created
-
+	long double ttl;
 public:
 	long double timestamp;//time stamp of every event
-	long double ttl;
+
 	Event()
 	{
 		eventType = EventType::NA;
@@ -995,17 +1048,27 @@ protected:
 private:
 	Mutex* mutx;
 	Event events;// a double sided queue of the events;
-	
+	sf::Sprite rect;//sprite of the rectangle
 	static int total;//total ships
 	static List<Greed::vertex> globalMap;//global map variable
 	int mutex_id;//id of the mutex to be used
-	Greed map_ob;//to use the facilities of the class Map
+	Greed map_ob;//to use the facilities of the class Greed
 	int ship_id;//id of the ship
 	deque<timeline> time_line;
+	vector<int> collided_ships;
+	void update_pos_collision();//function to update tile_pos and abs_pos of the ship after the collision occured
+	//for maintaining the frame rate of the user function
+	std::chrono::high_resolution_clock::time_point current_time;
+	sf::Clock clock;
+	int current_frame_no;
+	double elapsed_time;
+	int frame_rate_limit;//value of the frame rate to be kept for the user function
+	//ends
 	//armory of the ship
 public: //this will be public the user will be able to access this object freely
 	//object 
-
+	List<Greed::abs_pos> path;
+	bool frame_rate_limiter();//function to maintain the frame rate of the user function
 	double threshold_health;
 	double threshold_ammo;
 	double threshold_fuel;
@@ -1068,7 +1131,7 @@ private:
 	int autopilot = 0;//bit to check if the ship is moving in autopilot or not
 
 
-	List<Greed::abs_pos> path;
+
 	List<Greed::vertex> localMap;
 	deque<shipInfo> shipInfoList;
 
@@ -1092,7 +1155,15 @@ private:
 
 
 	}
+	bool anchorShip_collision();//special function to stop and reset the ship in case of a collision
+	void setPath_collision();//to zero out the path in case of a collision
 public:
+	bool collide(int s);
+	Greed::abs_pos getRealAbsolutePosition()
+	{
+		unique_lock<mutex> lk(mutx->m[ship_id]);
+		return absolutePosition;
+	}
 	Greed::abs_pos getAbsolutePosition(ShipSide s = ShipSide::FRONT)
 	{
 		unique_lock<mutex> lk(mutx->m[ship_id]);
@@ -1105,6 +1176,7 @@ public:
 
 
 	}
+private:
 	void initialize_player(string name, Mutex* mutx, deque<shipInfo>& ob, int code[rows][columns], int power, Greed::coords tile_pos)//considering that the default direction is south
 	{
 
@@ -1143,7 +1215,12 @@ public:
 		cannon_ob.initialize(mutx, power);
 
 	}
-	
+	void graphics_initializer(sf::Texture& tex)
+	{
+		rect.setTexture(tex);
+		rect.setPosition(cx(getCurrentTile().c * 80 + origin_x), cy(getCurrentTile().r * 80 + origin_y));
+
+	}
 	static List<Greed::vertex>& getGlobalMapref(int key)//to be used only once in main only
 	{
 		if (key == 2369)
@@ -1222,12 +1299,15 @@ public:
 		if (key == 2369)
 			localMap = ob;
 	}
-	bool updateCost(Greed::coords ob, double new_cost);
-
-	bool updateCost(Entity e, double new_cost, Bonus b);
-
 	void update_tile_pos(double x, double y);//this function has to be called after updating the pixel coordinates of the player
 	//void chaseShip1(int s_id);//funtion to chase a ship of the given ship_id:: autopilot mode will be on here
+	bool updateCost(Entity e, double new_cost, Bonus b);
+public:
+	bool updateCost(Greed::coords ob, double new_cost);
+
+
+
+
 
 private:
 	class boundingEntity
@@ -1270,7 +1350,16 @@ private:
 		ob.c3 = Greed::abs_pos(absolutePosition.x + len, absolutePosition.y + len);
 		return ob;
 	}
-
+	shipEntity getShipEntity_without_mutex()
+	{
+		shipEntity ob;
+		//unique_lock<mutex> lk(mutx->m[ship_id]);
+		ob.c1 = absolutePosition;
+		ob.c2 = Greed::abs_pos(absolutePosition.x + len, absolutePosition.y);
+		ob.c4 = Greed::abs_pos(absolutePosition.x, absolutePosition.y + len);
+		ob.c3 = Greed::abs_pos(absolutePosition.x + len, absolutePosition.y + len);
+		return ob;
+	}
 	shipEntity getShipEntity()//returns freshly prepared shipEntity //this cant be locked by a mutex
 	{
 		shipEntity ob;
@@ -1281,9 +1370,11 @@ private:
 		ob.c3 = Greed::abs_pos(absolutePosition.x + len, absolutePosition.y + len);
 		return ob;
 	}
-	bool collide(int s, double x, double y);//function to check if this->ship_id collided with a ship having ship id s
+	bool collide(int s, Greed::coords& pos);//function to check if this->ship_id collided with a ship having ship id s
 	bool isShipInMyRadius_forFire(int s_id, cannon myside, ShipSide oppSide);
+	void setBullet(Greed::bullet& bull, cannon can, int s_id, ShipSide s);//used to set the location and trajectory of the bullet in the graphics part
 public:
+	bool isOverlapping(shipEntity, shipEntity, int);
 	vector<int> cannonsInMyRadius();
 	vector<int> shipsInMyRadius();
 	vector<int> cannonsIamInRadiusOf();//this function returns the cannon id having ship in radius.
@@ -1322,10 +1413,15 @@ public:
 		unique_lock<mutex> lk(mutx->m[ship_id]);
 		return cannon_ob.activeBullets[cannon_ob.activeBullets.size() - 1];
 	}
-	List<Greed::bullet> getHitBulletList()//list of the bullets that had hit the ship
+	vector<Greed::bullet> getHitBulletList()//list of the bullets that had hit the ship
 	{
 		unique_lock<mutex> lk(mutx->m[ship_id]);
-		return bullet_hit;
+		vector<Greed::bullet> ret;
+		for (int i = 0; i < bullet_hit.howMany(); i++)
+		{
+			ret.push_back(bullet_hit[i]);
+		}
+		return ret;
 	}
 	void ceaseFire()//this function when called deletes all entries in the activeBulletList
 	{
@@ -1343,7 +1439,7 @@ public:
 
 	int getShipRadius()
 	{
-		unique_lock<mutex> lk(mutx->m[mutex_id]);
+		//unique_lock<mutex> lk(mutx->m[mutex_id]);
 		return radius;
 	}
 	double getCurrentFuel()
@@ -1383,32 +1479,20 @@ public:
 		unique_lock<std::mutex> lk(mutx->m[mutex_id]);
 		return health;
 	}
-	double getCurrentResources()
-	{
-		unique_lock<std::mutex> lk(mutx->m[mutex_id]);
-		return resources;
-	}
+
 	int getDiedStatus()
 	{
 		unique_lock<std::mutex> lk(mutx->m[mutex_id]);
 		return died;
 	}
-	int getInvisibleStatus()
-	{
-		unique_lock<std::mutex> lk(mutx->m[mutex_id]);
-		return invisible;
-	}
+
 	int getCurrentAmmo()
 	{
 
 		unique_lock<std::mutex> lk(mutx->m[mutex_id]);
 		return ammo;
 	}
-	int getCurrentXbow()
-	{
-		unique_lock<std::mutex> lk(mutx->m[mutex_id]);
-		return xbow;
-	}
+
 	int getTotalShips()
 	{
 		return total;
@@ -1427,7 +1511,7 @@ public:
 
 
 
-	attribute whatsHere(Greed::coords ob, int m = 0);
+	attribute whatsHere(Greed::coords ob, int m = 0);//leave this for now
 	// List<attribute> whatsHere(Map::abs_pos ob);
 
 	bool sail(Direction d, int tiles);
@@ -1440,7 +1524,7 @@ public:
 	//checkCollision is to check collision between a ship and the bullet
 	bool checkCollision(int sid, const Greed::bullet& ob);//sid is the ship id of  the victim ship.
 
-// bool updateCost(Greed::abs_pos ob,double new_cost);
+	// bool updateCost(Greed::abs_pos ob,double new_cost);
 	bool isCannonInRadius(int c_id, ShipSide side = ShipSide::FRONT);
 
 	bool isInShipRadius(int s_id, Greed::coords ob, ShipSide side = ShipSide::FRONT);//check for a poitn
@@ -1448,10 +1532,20 @@ public:
 	//make a function which checks if a tile is in a ships radius or not
 	bool isShipInMyRadius(int s_id, ShipSide myside = ShipSide::FRONT);//check for self
 
-		// armory starts from here
+	// armory starts from here
 
 
-	List<Greed::cannon> getCannonList();
+	vector<Greed::cannon> getCannonList()
+	{
+		vector<Greed::cannon> ret;
+		for (int i = 0; i < cannon_list.howMany(); i++)
+		{
+			ret.push_back(cannon_list[i]);
+		}
+		return ret;
+	}
+
+
 
 
 
@@ -1497,7 +1591,7 @@ public:
 	bool chaseShip(int s_id);//driver for calling chaseShip1 in a thread
 
 	double getDistance(int s_id);//returns the distance of s_id ship from the this->ship
-	void setBullet(Greed::bullet& bull, cannon can, int s_id, ShipSide s);//used to set the location and trajectory of the bullet in the graphics part
+
 
 	//entity conversion functions
 
@@ -1521,14 +1615,8 @@ public:
 
 
 void user1(ship& ob);
-void user3(ship& ob);
-void user4(ship& ob);
-void user5(ship& ob);
-void user6(ship& ob);
-void user7(ship& ob);
-void user8(ship& ob);
-void user9(ship& ob);
-void user10(ship& ob);
+
+
 void filter(List<Greed::coords>& ob);
 class Control//this class will control everything regarding the game
 {
@@ -1649,18 +1737,221 @@ public:
 		EXPLOSION, CANNON_FIRE, NA = -1
 	};
 
+	class GuiRenderer//class for rendering gui
+	{
 
-	double cx(double x)//callibration functions for x and y
+		bool showRadius;
+		int frame_rate;
+		sf::RenderWindow* window;
+		mutex m;//to lock for the special functions
+		int s_id;//to display the stats information
+		int no_of_players;
+		tgui::ScrollablePanel::Ptr scrollable_panel;//the main big panel containing all the smaller panels
+		deque<tgui::Panel::Ptr> player_panels;//the smaller panels that contain all the player information
+		deque<tgui::Label::Ptr> player_name;//name of the player used to distinguish the player_panels
+		Greed::abs_pos player_name_coord;//coordinate offset of the player name with respect to the player_panels
+		deque<tgui::Label::Ptr> score;//a label showing the text "score"
+		Greed::abs_pos score_coords;
+		deque<tgui::Picture::Ptr> health_icon;
+		deque < tgui::Picture::Ptr> fire_icon;
+		deque<tgui::Picture::Ptr> gold_icon;
+		deque < tgui::Picture::Ptr> fuel_icon;
+		deque<tgui::Label::Ptr> score_value;//this is the value of the score
+		deque<tgui::Label::Ptr> health_value;
+		deque<tgui::Label::Ptr> fire_value;
+		deque<tgui::Label::Ptr> gold_value;
+		deque<tgui::Label::Ptr> fuel_value;
+		//declare a deque of buttons for every player
+		deque<tgui::Button::Ptr> menu_button;
+		//declare a ListView object
+		tgui::ListView::Ptr stats_view;//list_view for showing the stats about the ship
+		tgui::ScrollablePanel::Ptr stats_view_panel;//panel that will hold the stats_view list
+		tgui::Button::Ptr closeButton;
+		tgui::Label::Ptr name_id;//to display the id and the name of the ship
+		tgui::Label::Ptr time_line_text;//to display time_line_text
+		deque<tgui::ListView::Ptr> timeline;//listview to show the timeline
+		sf::Text gameOver;//text to display that the game is over
+		sf::Text winner_text;//to print the winner of the game
+		tgui::Label::Ptr timer;//timer to display the time spent since the game started
+		tgui::Button::Ptr settings;//setting opener button
+		tgui::ChildWindow::Ptr settings_window;
+		tgui::ScrollablePanel::Ptr sp2;//for child window
+		tgui::Label::Ptr frameRateSliderText;//label to display that it is a frameRateSlider
+		tgui::Slider::Ptr frameRateSlider;
+		tgui::SeparatorLine::Ptr line1;
+		tgui::CheckBox::Ptr tb1;//button to change if ship's radius is visible or not
+		tgui::SeparatorLine::Ptr line2;
+		tgui::CheckBox::Ptr tb2;//for showing tile patterns
+		tgui::FileDialog::Ptr file;
+		tgui::Label::Ptr hoc;//health value for the cannnon
+
+		tgui::ChildWindow::Ptr final_window;
+		tgui::ListView::Ptr list1;
+
+
+	public:
+		GuiRenderer()
+		{
+			//offset coordinate for the name of the player in the small panel
+			s_id = -1;
+		}
+
+		GuiRenderer(int n, sf::RenderWindow* wind)
+		{
+
+			frame_rate = 60;
+			window = wind;
+			no_of_players = n;
+			player_name_coord = Greed::abs_pos(18, 3);
+			score_coords = Greed::abs_pos(10, 45);
+			s_id = -1;
+			showRadius = false;
+
+
+		}
+		void list1_renderer();
+		void final_window_renderer(tgui::Gui& gui);
+		void health_of_cannon_renderer(tgui::Gui& gui, tgui::Font& font);
+		void file_renderer(tgui::Gui& gui);
+		void tb1_callback(bool check);
+		void tb2_callback(bool check);
+		void tb2_renderer();
+		void tb1_renderer();
+		void line2_renderer();
+		void line1_renderer();
+		void sliderValueChange(int val);
+		void frameRateSlider_renderer();
+		void setting_button_callback(tgui::Gui& gui);
+		void frame_rate_slider_renderer();
+		void sp2_renderer();
+		void childWindowRenderer(tgui::Gui& gui);
+		void gameOverRenderer(sf::Font& font);
+		void winner_renderer(sf::Font& font);
+		void time_line_text_renderer(tgui::Gui& gui, tgui::Font& font);
+		void timer_renderer(tgui::Gui& gui);
+		void closeButton_callback();
+		void closeButton_renderer(sf::Texture& tex);
+		void time_line_renderer(tgui::Gui& gui);
+		void stats_view_renderer();
+		void stats_view_panel_renderer(tgui::Group::Ptr g);
+		void doIt();
+		void menu_button_callback(int i, tgui::Gui& gui);
+		void menu_button_renderer(sf::Texture& tex, tgui::Gui& gui);
+		void setting_button_renderer(sf::Texture& tex1, sf::Texture& tex2, tgui::Gui& gui);
+		void fuel_renderer1(sf::Texture& tex);
+		void gold_renderer1(sf::Texture& tex);
+		void fire_renderer1(sf::Texture& tex);
+		void sp_renderer(tgui::Group::Ptr group);//renderer for scrollable panel
+		void p_renderer();
+		void name_id_renderer(tgui::Gui& gui, tgui::Font& font);
+		void player_name_renderer(tgui::Font& font);
+		void score_renderer1();//for printing the simple text "score:"
+		void score_renderer2();
+		void health_renderer(sf::Texture& tex);
+		void health_value_renderer();
+		void fire_value_renderer();
+		void gold_value_renderer();
+		void fuel_value_renderer();
+		friend class graphics;
+	};
+	class tileMap :public sf::Transformable
 	{
-		return x + origin_x;
-	}
-	double cy(double y)
+	public:
+		sf::VertexArray tile;
+		/*
+		w=width of the map
+		h=height of the map
+		xx=x coordinate of the starting point of the tile map
+		yy=y coordinate of the starting point of the tile map
+		*/
+
+
+		void setScene(int w, int h, int xx, int yy, sf::Texture& tex, int code[rows][columns]);//here xx and yy are the coordinates
+	};
+	class animator
 	{
-		return y + origin_y;
-	}
+		int cid;//id of the cannon on which animation has to be performed
+		double total_time;
+		double starting_time;
+		double animation_time;
+		int no_of_frames;
+		ANIMATION_TYPE type;
+		sf::Vector2f animation_position;
+		int width;
+		sf::Vector2f animation_offset;//for moving effect on animation of explosion
+		int sid;//sid is the id of the ship where collision will take place
+	public:
+		animator()
+		{
+
+		}
+		animator(sf::Vector2f anipos, double st, ANIMATION_TYPE type, int cid = -1)//to be called to show explosion on cannon
+		{
+			if (type == ANIMATION_TYPE::EXPLOSION)
+			{
+				width = 30;
+				animation_position.x = anipos.x - (width / 2);
+				animation_position.y = anipos.y - (width / 2);
+				no_of_frames = 9;
+				animation_time = 0.5;
+				starting_time = st;
+				total_time = 0;
+				this->type = type;
+				sid = -1;
+			}
+			else if (type == ANIMATION_TYPE::CANNON_FIRE)
+			{
+				width = 80;
+				animation_position.x = anipos.x;//position of the animation with respect to the origin of the sprite
+				animation_position.y = anipos.y;
+				no_of_frames = 4;
+				animation_time = 0.5;
+				starting_time = st;
+				total_time = 0;
+				this->type = type;
+				this->cid = cid;
+
+			}
+		}
+		animator(sf::Vector2f anipos, double st, ANIMATION_TYPE type, sf::Vector2f ship_position, int s, int cid = -1)
+		{
+			if (type == ANIMATION_TYPE::EXPLOSION)
+			{
+				width = 30;
+				animation_position.x = anipos.x - (width / 2);
+				animation_position.y = anipos.y - (width / 2);
+				no_of_frames = 9;
+				animation_time = 0.5;
+				starting_time = st;
+				total_time = 0;
+				this->type = type;
+				animation_offset.x = animation_position.x - ship_position.x;
+				animation_offset.y = animation_position.y - ship_position.y;
+				sid = s;
+
+
+			}
+			else if (type == ANIMATION_TYPE::CANNON_FIRE)
+			{
+				width = 80;
+				animation_position.x = anipos.x;//position of the animation with respect to the origin of the sprite
+				animation_position.y = anipos.y;
+				no_of_frames = 4;
+				animation_time = 0.5;
+				starting_time = st;
+				total_time = 0;
+				this->type = type;
+				this->cid = cid;
+
+			}
+		}
+		void frame(double elapsed_time, sf::Sprite& sp);
+		friend graphics;
+	};
+
 	bool checkCollision(int sid, const Greed::bullet& ob);
 	static long double getTotalTime();
 	bool check_game_over(deque<ship*>& pl1);
-	void findWinner(deque<ship*>& l);
+	deque<ship*> findWinner(deque<ship*> l);
 	void callable(Mutex* mutx, int code[rows][columns], Map& map_ob);//taking the ship object so as to access the list of the player
 };
