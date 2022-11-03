@@ -7,6 +7,8 @@ https://user-images.githubusercontent.com/70859887/199690863-57a2a9c2-5220-4042-
 
 GREED is a real time strategy game, for which you will write an AI agent in C++, your AI player will need to manage your Battleship to strategically manage resources and destroy other ships to emerge as the winner.
 
+With GREED we are changing the way programmers compete and sharpen their skills, by providing them an engaging platform.
+
 You are free to choose any strategy ranging from Tree search, deep reinforcement, to Game theory.
 
 So brace yourself to watch your code performing in front of you!
