@@ -190,7 +190,7 @@
 	2. double y: y coordinate
 
 ## 3. class Greed::bullet
-  public data members:
+     public data members:
 	1. int id: id of the bullet
 	2. double power: power of the bullet
 	3. int launch_ship: id of the ship from which the bullet is launched
@@ -399,6 +399,32 @@
 
 ## 12. enum class ShipSide:
 	FRONT, REAR, MIDDLE, NA = -1
+## 13. class shipInfo:
+	  public data function:
+	  	1. int getTotalShips()
+			-> returns the total number of ships playing in the game
+		2. int getShipId()
+			-> returns the id of the ship 
+		3. int getShipRadius()
+			-> returns the radius of the ship asked
+		4. double getCurrentHealth()
+			-> returns the health of the ship
+		5. double getCurrentGold()
+			-> returns the gold of the ship
+		6. double getCurrentFuel()
+			-> returns the  fuel of the ship
+		7. int getDiedStatus()
+			-> returs 0 if ship is alive else returs 1
+		8. Direction getShipDirection()
+			-> returns the direction in which the ship is going
+		9. Greed::coords getCurrentTile()
+			-> retuns the front tile of the ship
+		10. Greed::coords getCurrentRearTile()
+			-> returns the rear tile of the ship
+		11. Greed::abs_pos getRealAbsolutePosition()
+			-> returns the Greed::abs_pos of the top left corner of the ship
+
+	 
 
 
 	
