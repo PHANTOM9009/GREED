@@ -35,7 +35,7 @@
 			int s_id: id of the ship you want to fire at.
 			ShipSide ship: side of the target ship at which you want to fire.
 	
-    8. bool fireAtCannon(int c_id, cannon can)
+    	8. bool fireAtCannon(int c_id, cannon can)
 		-> fires at the cannon.
 			int c_id: id of the cannon you want to fire at.
 			cannon can: fire either your FRONT or REAR cannon.
@@ -46,17 +46,17 @@
 			int s_id: id of the ship whose radius coords has to be returned.
 	
 	10. vector<Greed::bullet>& getBulletHitList()
-        -> return std::vector of type Greed::bullet which had hit the ship.
+      		-> return std::vector of type Greed::bullet which had hit the ship.
 	
 	11. int getTotalBulletsHit()
-        -> returns the number of bullets that had hit the ship
+        	-> returns the number of bullets that had hit the ship
    
   	12. Greed::bullet getLastHitBullet()
 		-> returns the last bullet that had hit the ship
 			returns an object Greed::bulllet
 	
 	13. Greed::bullet getLastBulletFired()
-       ->returns the last fired bullet
+       		->returns the last fired bullet
 	
 	14. void ceaseFire()
 		-> clears the fire buffer
@@ -68,7 +68,7 @@
 		-> returns the firing radius of the ship
 
  	17. double getCurrentFuel()
-        -> returns the current fuel that the ship has
+        	-> returns the current fuel that the ship has
   
    	18. Direction getShipDirection()
 		-> returns the direction of the ship
@@ -101,8 +101,8 @@
 
 	27. bool setPath(List<Greed::coords> ob, int state = 1)
 		->to set the path that the ship will take.
-		List<Greed::coords> ob=> list of coords returned by setTarget function
-		int state=> is 1 by default.
+		  List<Greed::coords> ob=> list of coords returned by setTarget function
+		  int state=> is 1 by default.
 
 	28. bool sail(Direction d, int tiles)
 		-> for sailing the ship in direction d, tiles number of times.
@@ -181,6 +181,8 @@
 	45. void frame_rate_limiter()
 		-> call this function in the `event handling loop of your game inside an if condition` 
 		   so that it can control the speed of your loop and run your algorithm smoothly.
+	46. shipInfo getShipList()
+		-> returns a shipInfo object (class definition could be found below) which contains the information of all the ships playing the game
 		
  
 
