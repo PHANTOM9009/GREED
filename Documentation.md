@@ -179,8 +179,7 @@
 			int m=> m=0 if you want to refer to the global map
 					m=1 if you want to refer to the local map
 	45. void frame_rate_limiter()
-		-> call this function in the 
-		  > event handling loop of your game inside an if condition 
+		-> call this function in the `event handling loop of your game inside an if condition` 
 		   so that it can control the speed of your loop and run your algorithm smoothly.
 		
  
