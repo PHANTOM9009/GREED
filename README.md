@@ -12,7 +12,6 @@ against other algorithms.
 
 ![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image3.png)
 
-
 ## Concept:
 
 You are a pirate among other pirates in the sea, your aim is to be the last standing ship by defeating all other
