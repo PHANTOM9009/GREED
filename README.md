@@ -44,7 +44,7 @@ for more details refer to:
 2. [Rules](Rules.md)
 3. [Documentation](Documentation.md)
 
-Join our discord Community: [Discord community](https://discord.gg/vupXndVa)
+Join our discord Community: [Discord community](https://discord.gg/2CBeaMAAay)
 
 
 
