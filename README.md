@@ -47,6 +47,9 @@ for more details refer to:
 
 Join our discord Community: [Discord community](https://discord.gg/2CBeaMAAay)
 
+# Collaborate
+  if you want to become an Alpha tester or collaborte on the Project, just raise an issue.
+
 
 
 
