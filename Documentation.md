@@ -1,9 +1,13 @@
 # DOCUMENTATION:
 ## 1. Class ship:
 	public members:
+	
 	1. double threshold_health : threshold value of the health of the ship after which low_health event is triggered
+	
 	2. double threshold_ammo : threshold value of ammo after which low_ammo event is triggered
+	
 	3. double threshold_fuel : threshold value of fuel after which low_fuel event is triggered.
+	
 	public functions:
 	1. Greed::abs_pos getAbsolutePosition(ShipSide s = ShipSide::FRONT)
 		-> returns the Greed::abs_pos object containing the absolute position of the ship's FRONT or REAR side
