@@ -1,7 +1,7 @@
 #include<user_lib.hpp>//includes all the utilites of the game
 //include other libraries that user wants
 using namespace std;
-void agent(ship& ob)//this function takes a handler(ob) to the ship so that the user can control the player
+void GreedMain(ship& ob)//this is the main function that is called to control your ship, ship &ob is the handler object to your battleship
 {
 	//write initializing logic
 	/*for example:
@@ -18,5 +18,5 @@ void agent(ship& ob)//this function takes a handler(ob) to the ship so that the 
 }
 /*NOTE:
 * the user is requested to use exception handling in the given function, if not all exceptions are handled it will terminate your thread on
-* which the function  runs.
+* which the function runs.
 */
