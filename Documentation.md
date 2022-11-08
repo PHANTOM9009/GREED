@@ -34,6 +34,7 @@
 			cannon can: fire either FRONT or REAR cannon.
 			int s_id: id of the ship you want to fire at.
 			ShipSide ship: side of the target ship at which you want to fire.
+			
 	
     	8. bool fireAtCannon(int c_id, cannon can)
 		-> fires at the cannon.
@@ -183,6 +184,10 @@
 		   so that it can control the speed of your loop and run your algorithm smoothly.
 	46. shipInfo getShipList()
 		-> returns a shipInfo object (class definition could be found below) which contains the information of all the ships playing the game
+		
+	47. vector<Greed::coords> getRadiusCoords_cannon(int c_id)
+		-> returns a vector of Greed::coords which are in the radius of the cannon passed as id
+			int c_id : id of the cannon of which you want to know the radius.
 		
  
 
