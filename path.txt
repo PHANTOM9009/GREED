@@ -1,0 +1,1 @@
+F:/Visual Studio setup/VC/Auxiliary/Build/vcvars64.bat

@@ -674,7 +674,7 @@ public:
 	friend int main();
 
 };
-void user2(ship& ob);
+
 
 class shipInfo
 {
@@ -1143,7 +1143,7 @@ private:
 		unique_lock<mutex> lk(mutx->m[ship_id]);
 		fuel = n;
 	}
-	Greed::abs_pos getAbsolutePosition1(ShipSide s = ShipSide::FRONT)
+	Greed::abs_pos getAbsolutePosition1(ShipSide s = ShipSide::FRONT)//this function is without the mutex
 	{
 
 		if (s == ShipSide::FRONT)
@@ -1159,7 +1159,7 @@ private:
 	void setPath_collision();//to zero out the path in case of a collision
 public:
 	bool collide(int s);
-	Greed::abs_pos getRealAbsolutePosition()
+	Greed::abs_pos getRealAbsolutePosition()//returns the top left corner of the ship sprite
 	{
 		unique_lock<mutex> lk(mutx->m[ship_id]);
 		return absolutePosition;
@@ -1306,9 +1306,6 @@ public:
 	bool updateCost(Greed::coords ob, double new_cost);
 
 
-
-
-
 private:
 	class boundingEntity
 	{
@@ -1373,8 +1370,9 @@ private:
 	bool collide(int s, Greed::coords& pos);//function to check if this->ship_id collided with a ship having ship id s
 	bool isShipInMyRadius_forFire(int s_id, cannon myside, ShipSide oppSide);
 	void setBullet(Greed::bullet& bull, cannon can, int s_id, ShipSide s);//used to set the location and trajectory of the bullet in the graphics part
-public:
 	bool isOverlapping(shipEntity, shipEntity, int);
+public:
+
 	vector<int> cannonsInMyRadius();
 	vector<int> shipsInMyRadius();
 	vector<int> cannonsIamInRadiusOf();//this function returns the cannon id having ship in radius.
@@ -1384,6 +1382,7 @@ public:
 	//defining the ctor
 	bool fireAtCannon(int c_id, cannon can);//fire at any cannon: can is the side of the ship's cannon
 	vector<Greed::coords> getRadiusCoords_ship(int s_id);//function to return the tiles that are in the radius of a particular entity, just pass the id of the ship
+	vector<Greed::coords> getRadiusCoords_cannon(int c_id);//function to return the tiles that are in the radius of the cannon
 	ship();
 	List<Greed::bullet>& getBulletHitList()
 	{
@@ -1520,10 +1519,10 @@ public:
 
 	Greed::path_attribute setTarget(int s_id);//overloaded function for returning the object of path_attribute
 	//Greed::path_attribute setTarget(Greed::abs_pos ob) ;//overloaded function
-
+private:
 	//checkCollision is to check collision between a ship and the bullet
 	bool checkCollision(int sid, const Greed::bullet& ob);//sid is the ship id of  the victim ship.
-
+public:
 	// bool updateCost(Greed::abs_pos ob,double new_cost);
 	bool isCannonInRadius(int c_id, ShipSide side = ShipSide::FRONT);
 
@@ -1612,9 +1611,6 @@ public:
 
 
 };
-
-
-void user1(ship& ob);
 
 
 void filter(List<Greed::coords>& ob);
@@ -1954,4 +1950,22 @@ public:
 	bool check_game_over(deque<ship*>& pl1);
 	deque<ship*> findWinner(deque<ship*> l);
 	void callable(Mutex* mutx, int code[rows][columns], Map& map_ob);//taking the ship object so as to access the list of the player
+};
+class fileData
+{
+public:
+	int no_of_players;
+	string player_name;
+
+	fileData()
+	{
+
+	}
+	fileData(int no, string& name)
+	{
+		no_of_players = no;
+		player_name = name;
+
+
+	}
 };
