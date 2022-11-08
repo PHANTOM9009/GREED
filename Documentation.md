@@ -35,7 +35,7 @@
 			int s_id: id of the ship you want to fire at.
 			ShipSide ship: side of the target ship at which you want to fire.
 	
-    8. bool fireAtCannon(int c_id, cannon can)
+    	8. bool fireAtCannon(int c_id, cannon can)
 		-> fires at the cannon.
 			int c_id: id of the cannon you want to fire at.
 			cannon can: fire either your FRONT or REAR cannon.
@@ -46,17 +46,17 @@
 			int s_id: id of the ship whose radius coords has to be returned.
 	
 	10. vector<Greed::bullet>& getBulletHitList()
-        -> return std::vector of type Greed::bullet which had hit the ship.
+      		-> return std::vector of type Greed::bullet which had hit the ship.
 	
 	11. int getTotalBulletsHit()
-        -> returns the number of bullets that had hit the ship
+        	-> returns the number of bullets that had hit the ship
    
   	12. Greed::bullet getLastHitBullet()
 		-> returns the last bullet that had hit the ship
 			returns an object Greed::bulllet
 	
 	13. Greed::bullet getLastBulletFired()
-       ->returns the last fired bullet
+       		->returns the last fired bullet
 	
 	14. void ceaseFire()
 		-> clears the fire buffer
@@ -68,7 +68,7 @@
 		-> returns the firing radius of the ship
 
  	17. double getCurrentFuel()
-        -> returns the current fuel that the ship has
+        	-> returns the current fuel that the ship has
   
    	18. Direction getShipDirection()
 		-> returns the direction of the ship
@@ -101,8 +101,8 @@
 
 	27. bool setPath(List<Greed::coords> ob, int state = 1)
 		->to set the path that the ship will take.
-		List<Greed::coords> ob=> list of coords returned by setTarget function
-		int state=> is 1 by default.
+		  List<Greed::coords> ob=> list of coords returned by setTarget function
+		  int state=> is 1 by default.
 
 	28. bool sail(Direction d, int tiles)
 		-> for sailing the ship in direction d, tiles number of times.
@@ -178,6 +178,11 @@
 			Greed::coords ob=> coordinates of the tile about which you want to know
 			int m=> m=0 if you want to refer to the global map
 					m=1 if you want to refer to the local map
+	45. void frame_rate_limiter()
+		-> call this function in the `event handling loop of your game inside an if condition` 
+		   so that it can control the speed of your loop and run your algorithm smoothly.
+	46. shipInfo getShipList()
+		-> returns a shipInfo object (class definition could be found below) which contains the information of all the ships playing the game
 		
  
 
@@ -187,7 +192,7 @@
 	2. double y: y coordinate
 
 ## 3. class Greed::bullet
-  public data members:
+     public data members:
 	1. int id: id of the bullet
 	2. double power: power of the bullet
 	3. int launch_ship: id of the ship from which the bullet is launched
@@ -396,6 +401,32 @@
 
 ## 12. enum class ShipSide:
 	FRONT, REAR, MIDDLE, NA = -1
+## 13. class shipInfo:
+	  public data function:
+	  	1. int getTotalShips()
+			-> returns the total number of ships playing in the game
+		2. int getShipId()
+			-> returns the id of the ship 
+		3. int getShipRadius()
+			-> returns the radius of the ship asked
+		4. double getCurrentHealth()
+			-> returns the health of the ship
+		5. double getCurrentGold()
+			-> returns the gold of the ship
+		6. double getCurrentFuel()
+			-> returns the  fuel of the ship
+		7. int getDiedStatus()
+			-> returs 0 if ship is alive else returs 1
+		8. Direction getShipDirection()
+			-> returns the direction in which the ship is going
+		9. Greed::coords getCurrentTile()
+			-> retuns the front tile of the ship
+		10. Greed::coords getCurrentRearTile()
+			-> returns the rear tile of the ship
+		11. Greed::abs_pos getRealAbsolutePosition()
+			-> returns the Greed::abs_pos of the top left corner of the ship
+
+	 
 
 
 	

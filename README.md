@@ -1,22 +1,32 @@
 
 
 
-# About the game:
+# Welcome to GREED
 
-you must have played many games against each other or against computers, but ever wondered how two computers will
-look competing against each other? ofcourse computers can't think for themselves yet, but you can make them think
-by writing efficient and smart algorithms.
+https://user-images.githubusercontent.com/70859887/199690863-57a2a9c2-5220-4042-b9ea-b948c21805ad.mp4
 
-This game is a powerful set of API's and graphics that enable you to write AI/ML algorithms in C++ to compete 
-against other algorithms.
+ GREED is a real time strategy game, for which you will write an AI agent in C++, your AI player will need to manage your Battleship to strategically manage       
+ resources and destroy other ships to emerge as the winner.
 
-![Game view](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image3.png)
+You are free to choose any strategy ranging from Tree search, deep reinforcement, to Game theory.
+
+With GREED we are changing the way programmers compete and sharpen their skills, by providing them an engaging platform. GREED currently supports C++ , support for more languages is coming soon.
+
+So brace yourself to watch your code performing in front of you!
+
+And one more thing..
+This game is in alpha testing stage, if you want to be a part of alpha testing and become a contributor to this project, just raise an issue and we will get back to you.
+
+Is it necessary to know Machine learning to play this game ?
+
+No, this challenge is all about your programming, problem solving, game theory, and analytical thinking skills. But if you've already got some skills in ML and think you can apply them in this challenge - go ahead!
+
+
 
 
 ## Concept:
+  You have to program your battleship to be the last one standing.
 
-You are a pirate among other pirates in the sea, your aim is to be the last standing ship by defeating all other
-pirate ships i.e the last ship standing wins.
 
 Steps to play the game:
 
@@ -26,13 +36,19 @@ Steps to play the game:
 
 1. download the entire package/zip file from the github repository.
 2. double click the  GREED.exe application to launch the game.
+3. upload the algorithms.
+4. Enjoy!
 
+NOTE: sample algorithms and template program are enclosed in "sample algorithms" folder in the repository, you can use them for reference.
 for more details refer to:
 1. [Notes](Notes.md)
 2. [Rules](Rules.md)
 3. [Documentation](Documentation.md)
 
-Join our discord Community: [Discord community](https://discord.gg/vupXndVa)
+Join our discord Community: [Discord community](https://discord.gg/2CBeaMAAay)
+
+# Collaborate
+  if you want to become an Alpha tester or collaborte on the Project, just raise an issue.
 
 
 
