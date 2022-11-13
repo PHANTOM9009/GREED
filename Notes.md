@@ -12,7 +12,7 @@ the row increases. The maximum value of the row is 11 and of column is 23. Where
 is made of land hence ship can't be placed there. so the movable coords in the map varies from (0,0) to (10,23)
 as depicted in the picture below.
 
-![picture](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/image2.png)
+![picture](https://github.com/PHANTOM9009/GREED/blob/master/GREED/map_1%20attributes/image2.png)
 
 elements of the Map:
 
@@ -91,7 +91,7 @@ The best way to learn more about this function is to try it out!
 
 
 
-   ![image](https://github.com/PHANTOM9009/GREED/blob/master/map_1%20attributes/radius.png)
+   ![image](https://github.com/PHANTOM9009/GREED/blob/master/GREED/map_1%20attributes/radius.png)
 ## 4. Firing:
 	Every ship has 2 cannons attached, one at the front and another at the rear. You can fire from any one of them at a time.
 
