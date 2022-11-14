@@ -44,9 +44,12 @@ for more details refer to:
 1. [Notes](Notes.md)
 2. [Rules](Rules.md)
 3. [Documentation](Documentation.md)
+4. [Quick start](quick_start.md)
 
 Join our discord Community: [Discord community](https://discord.gg/2CBeaMAAay)
 
+# Quick Start
+  [Quick start](quick_start.md)
 # Collaborate
   if you want to become an Alpha tester or collaborte on the Project, just raise an issue.
 
