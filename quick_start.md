@@ -75,7 +75,7 @@ Next we see the arguement passed to **void GreedMain(ship &ob)**, ob is the hand
  
  Before we dive into the algorithm you must read the [documentation](documentation.md).
  
- #### Before we start, I want you to know what our should battleship do, then we will program it accordingly:
+ #### Before we start, I want you to know what our battleship will do, then we will program it accordingly:
           1. It should select its target battleship based on a simple heuristic function.
           2. It should dodge cannons.
           3. It should upgrade health and ammo, if they are below threshold value
