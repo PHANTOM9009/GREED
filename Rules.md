@@ -1,17 +1,15 @@
 # Rules of the game:
  
-1. Last standing ship wins.
+1. Last standing ship wins and gets +100 in overall score
 
 2. in case there are one or more ships alive and are unable to kill each other  or the timer of the game runs away
-	the tie will be broken by the score of the respective ship
-
-3. user can set the time limit on the game.
+	the tie will be broken by the score of the respective ship (both the ships will get +100)
 
 ## firing rules:
  
 1. +2 score on ever bullet hit on another ship or a cannon
 
-2. health is reduced by the power of the bullet hit on a ship or a cannon
+2. health is reduced by the power( reduces by -5 default)  of the bullet hit on a ship or a cannon
 
 3. +2 gold from the gold reserve of the target ship to the firing ship
 
@@ -35,12 +33,12 @@
 
 ## Conversion rules:
   
-   1. Gold to Fuel: call the function "ship::upgradeFuel(int n)" to increase the fuel in lieu of Gold.
+   1. Gold to Fuel: call the function "ship::Greed_upgradeFuel(int n)" to increase the fuel in lieu of Gold.
    	1 Fuel is equal to 5 Gold coins.
-   2. Gold to Health: call the function "ship::upgradeHealth(int n)" to increase the Health in lieu of Gold.
+   2. Gold to Health: call the function "ship::Greed_upgradeHealth(int n)" to increase the Health in lieu of Gold.
     	1 Health is equal to 5 Gold coins.
 	
-   3. Gold to Ammo: call the function "ship::upgradeAmmo(int n)" to increase the Ammo in lieu of Gold.
+   3. Gold to Ammo: call the function "ship::Greed_upgradeAmmo(int n)" to increase the Ammo in lieu of Gold.
     	1 Ammo is equal to 1 Gold coin.
    	
  
