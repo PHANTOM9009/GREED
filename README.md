@@ -30,7 +30,9 @@ No, this challenge is all about your programming, problem solving, game theory, 
 
 ## prerequisite:
   1. visual studio (to run your algorithm): We don't force you to write in our boring editors, Write code and compete in your favorite IDE! 
-  2. windows OS (64 bit)	
+  2. windows OS (64 bit)
+  3. high speed internet connection ( for online games you will need 40mbps+ upload speed to play the game smoothly)
+     
 
 NOTE: sample algorithms and template program are enclosed in "sample algorithms" folder in the repository, you can use them for reference.
 for more details refer to:
