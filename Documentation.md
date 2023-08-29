@@ -14,11 +14,13 @@
 			as passed in function argument.
 			By default it returns the absolute position in the world of the Ships's FRONT part.
 
-	2. bool updateCost(Greed::coords ob, double new_cost)
-		-> updates the cost of the coord <ob> as passed as a parameter to the new_cost in the local map of the player
+	2. void Greed_updateCost(Greed::coords ob, double new_cost)
+		-> updates the cost of the coord "ob" as passed as a parameter to the new_cost in the local map of the player
 			These changes are not made in the original map, but in your local map for your navigation.
 			the more the cost of a tile, your ship has less probability of taking that path.
-
+   			the navigation path is calculated using your local map because the cost of each tile can be tuned by the player.
+      			The global map with default cost is used to deduct your fuel, fuel is deducted according to the global/default costs
+	 		for all the players.
 
 	3. vector<int> cannonsInMyRadius()
     	-> returns a std::vector of cannon id's which are in the radius of the player ship.
@@ -37,14 +39,14 @@
 		-> return a std::vector of the ship id's whose radius you are in. It checks both FRONT and REAR part of 
 			your ship and adds it if either of your ship's part is in the radius of the ship.
 
-	7. bool fireCannon(cannon can, int s_id, ShipSide ship)
+	7. bool Greed_fireCannon(cannon can, int s_id, ShipSide ship)
 		-> fires your cannon.
 			cannon can: fire either FRONT or REAR cannon.
 			int s_id: id of the ship you want to fire at.
 			ShipSide ship: side of the target ship at which you want to fire.
 			
 	
-    	8. bool fireAtCannon(int c_id, cannon can)
+    	8. bool Greed_fireAtCannon(int c_id, cannon can)
 		-> fires at the cannon.
 			int c_id: id of the cannon you want to fire at.
 			cannon can: fire either your FRONT or REAR cannon.
@@ -108,23 +110,16 @@
 	26. double getCurrentGold()
 		-> returns the current gold that the ship has
 
-	27. bool setPath(List<Greed::coords> ob, int state = 1)
+	27. bool Greed_setPath(List<Greed::coords> ob, int state = 1)
 		->to set the path that the ship will take.
 		  List<Greed::coords> ob=> list of coords returned by setTarget function
 		  int state=> is 1 by default.
 
-	28. bool sail(Direction d, int tiles)
+	28. bool Greed_sail(Direction d, int tiles)
 		-> for sailing the ship in direction d, tiles number of times.
 			Direction d=> direction in which the ship moves
 			tiles=>number of tiles to move in that direction
 
-	29. Greed::path_attribute setTarget(Greed::coords ob)
-		-> to set destination in the map
-		Greed::coords=> destination coords
-
-	30. Greed::path_attribute setTarget(int s_id)
-		-> to set the destination of your ship to the current tile of the ship having id as s_id
-			int s_id=> id of the target ship
 	
 	31. bool isCannonInRadius(int c_id, ShipSide side = ShipSide::FRONT)
 		-> returns true if cannon is in your radius
@@ -167,17 +162,17 @@
 		-> returns the eucledian distance between your ship and the ship passed in the function
 		int s_id=> ship from which the distance has to be measured
 	
-	41. bool upgradeHealth(int n)
+	41. bool Greed_upgradeHealth(int n)
 		-> this function upgrades your health by n, by consuming the money required for "n" health
 			int n=> addition in health you want
 			returns: if it has upgraded health or not
 	
-	42. bool upgradeAmmo(int n)
+	42. bool Greed_upgradeAmmo(int n)
 		-> this function upgrades your ammo by n, by consuming the money required for "n" ammo
 			int n=> addition in ammo you want
 			returns: if it has upgraded ammo or not
 			
-	43. bool upgradeFuel(int n)
+	43. bool Greed_upgradeFuel(int n)
 		-> 	this function upgrades your Fuel by n, by consuming the money required for "n" Fuel
 			int n=> addition in Fuel you want
 			returns: if it has upgraded Fuel or not
