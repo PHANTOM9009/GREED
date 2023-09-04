@@ -17,7 +17,7 @@
  
 ```c++
 
-/*1*/ #include<user_lib.hpp>//includes all the utilites of the game
+/*1*/ #include<greed_offline.hpp>//includes all the utilites of the game
 //include other libraries that user wants
 using namespace std;
 /*2*/ void GreedMain(ship& ob)//this is the main function that is called to control your ship, ship &ob is the handler object to your battleship
