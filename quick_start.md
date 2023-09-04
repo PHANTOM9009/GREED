@@ -43,7 +43,7 @@ using namespace std;
         }
 }
 /*NOTE:
-* the user is requested to use exception handling in the given function, if not all exceptions are handled it will terminate your thread on
+* the user is requested to use exception handling in the given function, if not all exceptions are handled it will terminate the process on
 * which the function runs.
 */
 
