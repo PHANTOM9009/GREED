@@ -17,10 +17,11 @@ Now when you have set the project, we are ready to write your first GREED algori
 To write your own, Copy the template of the program available in the downloaded folder. To know how to write your algorithm check [Quick Start](quick_start.md)
 
 ## 5. One more thing:
-In order to see your agents perfor in front of you, you need to copy *greed_display.exe* from the downloaded folder and paste in the folder where your algorithm file is present.
+In order to see your agents perfor in front of you, you need to copy *display package* from the downloaded folder and paste in the folder where your algorithm file is present.
 
 ## 6. How to start the lobby server:
 Till now we have seen how to setup the place where you will code your algorithms, now lets see how to start GREED OFFLINE.
+You will find the servers in *Server Package* folder of the downloaded folder.
 Start the lobby_server.exe (Lobby_server is the server which connects with many game_servers and then tell the incoming client which game server it has connect to)
 Enter the number of players that will play in one game server (in community version maximum number of players in a game server is 4)
 your lobby server should be listening for the game servers now.
