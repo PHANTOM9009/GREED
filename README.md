@@ -25,30 +25,30 @@ No, this challenge is all about your programming, problem solving, game theory, 
 
 
 ## Concept:
-  You have to program your battleship to be the last one standing.
+  You need to program your battleship to destroy other battleships, cannons, loot gold and make your battleship to be the last one standing.
+  Your scores after a match is calculated on the overall performance of your battleship, for more information check out [Rules](Rules.md).
 
-
-Steps to play the game:
-
-### prerequisite:
-  1. visual studio 2022+ version or visual studio developer tools
-  2. windows OS (64 bit)	
-
-1. download the entire package/zip file from the github repository.
-2. double click the  GREED.exe application to launch the game.
-3. upload the algorithms.
-4. Enjoy!
+## prerequisite:
+  1. visual studio (to run your algorithm): We don't force you to write in our boring editors, Write code and compete in your favorite IDE! 
+  2. windows OS (64 bit)
+  3. high speed internet connection ( for online games you will need 40mbps+ upload speed to play the game smoothly)
+     
 
 NOTE: sample algorithms and template program are enclosed in "sample algorithms" folder in the repository, you can use them for reference.
 for more details refer to:
-1. [Notes](Notes.md)
+1. [Notes on GREED](Notes.md)
 2. [Rules](Rules.md)
 3. [Documentation](Documentation.md)
+4. [Quick start](quick_start.md)
 
 Join our discord Community: [Discord community](https://discord.gg/2CBeaMAAay)
 
-# Collaborate
-  if you want to become an Alpha tester or collaborte on the Project, just raise an issue.
+# Quick Start
+  [Quick start](quick_start.md)
+  
+# Help the Community
+  Help the community to write better code for GREED by uploading your leading algorithms on this Repository, Just open a pull request to upload your algorithm, once its approved you will get GREED POINTS
+  which can be used to take part in prized competitions.
 
 
 
