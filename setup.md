@@ -1,5 +1,29 @@
 # Steps to setup GREED OFFLINE in your computer:
+## Compile from Source code:
+Alert:This may be difficult for some people.
+### 1. Setup Visual Studio:
+Download Visual Studio from its offical website. Download C++ tools.
 
+### 2. Create a New Empty Project:
+Select a new Empty C++ console project.
+
+### 3. Setup SFML 2.5.1 and TGUI 1.0 libs in your visual stduio project
+Download SFML and TGUI package for Visual Studio, and include its libs in your project.
+
+### 4. Compile the servers
+Compile lobby_server.cpp and server_v3.cpp, You will get the exe of these servers if all goes well.
+
+### 5. Setup the Client
+To run your client, you need to first write your algorithm (you can also use the sample algorithm given in the repository),
+after you have a working algorithm include the libraries given in the repo, there is no need to include SFML and TGUI to compile your algorithm.
+
+### 6. Compile the display unit
+You will find the source code of the display unit in the display package, Compile this code using the same project specifications as you used to compile the server
+ensure that the compiled exe should be named client_v2_new.exe and should be put in the directory of your alogrithm.
+
+# Download the pre-compiled binaries from the website.
+
+You can download the game from [AI_PLAYGROUNDS](https://aiplaygrounds.in)
 ## 1. Setup Visual Studio:
 Download Visual Studio from its offical website. Download C++ tools.
 
