@@ -5,6 +5,7 @@
 
 https://user-images.githubusercontent.com/70859887/199690863-57a2a9c2-5220-4042-b9ea-b948c21805ad.mp4
 
+ GREED is a part of [AI_PLAYGROUNDS](https://aiplaygrounds.in)
  GREED is a real time strategy game, for which you will write an AI agent in C++, your AI player will need to manage your Battleship to strategically manage       
  resources and destroy other ships to emerge as the winner.
 
