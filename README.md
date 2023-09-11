@@ -45,7 +45,7 @@ for more details refer to:
 
 Join our discord Community: [Discord community](https://discord.gg/2CBeaMAAay)
 # Setup GREED
-  [How to setup GREED](How to setup GREED OFFLINE.md)
+  [How to setup GREED](setup.md)
   
 # Quick Start
   [Quick start](quick_start.md)
