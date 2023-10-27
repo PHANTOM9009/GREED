@@ -56,21 +56,6 @@
 			to the function.
 			int s_id: id of the ship whose radius coords has to be returned.
 	
-	10. vector<Greed::bullet>& getBulletHitList()
-      		-> return std::vector of type Greed::bullet which had hit the ship.
-	
-	11. int getTotalBulletsHit()
-        	-> returns the number of bullets that had hit the ship
-   
-  	12. Greed::bullet getLastHitBullet()
-		-> returns the last bullet that had hit the ship
-			returns an object Greed::bulllet
-	
-	13. Greed::bullet getLastBulletFired()
-       		->returns the last fired bullet
-	
-	14. void ceaseFire()
-		-> clears the fire buffer
 	
 	15. deque<shipInfo> getShipList()
 		-> returns a list of ships which are in the game
