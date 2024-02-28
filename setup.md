@@ -23,7 +23,7 @@ In order to see your agents perfor in front of you, you need to copy *display pa
 
 
 
-## 8. Run your algorithm file:
+## 6. Run your algorithm file:
 If you have followed every step correctly when you run your algorithm file in visual studio,you must be seeing a message asking to open the game in which mode?
 if you select the option to start without the display unit, then only your algorithm will run but you will not be able to see the game happening. this feature is made if you want to 
 run many clients in a single machine, in that you will only need one display unit, so when you start the last client choose the option to start with display unit.
