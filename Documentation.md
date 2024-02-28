@@ -138,10 +138,14 @@
 	38. bool anchorShip()
 		-> stops the ship movement and clears the path buffer
 	
-	39. bool chaseShip(int s_id)
+	39. bool Greed_chaseShip(int s_id)
 		-> function to chase a ship with ship id=> s_id
 			Note: once you have called this function the ship is transferred to autopilot mode i.e it will take the best routes according to the cost of the tiles set by you in local map,
 			the ship will only stop if it has reached in the radius of target ship, to come out of auto pilot mode call the function anchor ship, this gives you back the navigation controls of the ship
+   		You will get out of the autopilot mode in the following scenarios:
+     		1. You have collided with any object
+       		2. The ship you were chasing was destroyed
+	 	3. You call the function anchorShip()
 
 	40. double getDistance(int s_id)
 		-> returns the eucledian distance between your ship and the ship passed in the function
