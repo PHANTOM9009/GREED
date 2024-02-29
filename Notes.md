@@ -12,7 +12,7 @@ the row increases. The maximum value of the row is 11 and of column is 23. Where
 is made of land hence ship can't be placed there. so the movable coords in the map varies from (0,0) to (10,23)
 as depicted in the picture below.
 
-![picture](https://github.com/PHANTOM9009/GREED/blob/master/GREED/map_1%20attributes/image2.png)
+![picture](https://github.com/PHANTOM9009/GREED/blob/master/Screenshot%20(608).png)
 
 elements of the Map:
 
@@ -34,28 +34,7 @@ There are functions that dictates the laws of navigation that can be found in do
 you can do the following things:
  2.1 navigate ship to a particular destination:
 
-  to do this you first need to select the Greed::coords of the destination. make sure that the coords are valid  
-  and are in the range of the map.
- 
-  then call the function ship::setTarget(Greed::coords) and pass the destination coords. This function will return
-	an object of path_attribute which contains two things about the path: 1. fuel that will be spent on taking that path
-	2. a List of coords that your ship will take to reach the destination.
-	
-	you can make decision on the basis of these two parameters whether you want to take that path or not.
-
-NOTE: the path returned is the shortest and the most optimal path which is curated by the API. Mind you, that
-the path returned depends solely on your local Map, i.e if you have set the cost of some tiles high then the API
-won't choose those tiles in the final path. So make sure that your local Map is up-to-date and according to your
-requirements.
-
-If you chose to take that path, then you need to fill your path buffer with the coords that were returned before
-this can be done with a simple function call to ship::setPath(List<Greed::coords>) just pass the returned List of 
-coords to this function and your ship is all set to reach that destination with the most optimal path possible.
-
-NOTE: if you don't wish to use the API path finding algorithm then you are free to create your own. In that case
-you don't need to call the first function i.e setTarget() for creation of List of coords. Rather create your own
-List of coords and just call the second function i.e setPath() to set the path buffer to your's curated path.
-This game is highly modifyable.
+  Use setTarget() function
 
 2.2 Sail your ship leisurely:
 
@@ -91,7 +70,7 @@ The best way to learn more about this function is to try it out!
 
 
 
-   ![image](https://github.com/PHANTOM9009/GREED/blob/master/GREED/map_1%20attributes/radius.png)
+   ![image](https://github.com/PHANTOM9009/GREED/blob/master/Screenshot%20(602).png)
 ## 4. Firing:
 	Every ship has 2 cannons attached, one at the front and another at the rear. You can fire from any one of them at a time.
 

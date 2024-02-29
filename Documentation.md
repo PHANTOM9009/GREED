@@ -56,21 +56,6 @@
 			to the function.
 			int s_id: id of the ship whose radius coords has to be returned.
 	
-	10. vector<Greed::bullet>& getBulletHitList()
-      		-> return std::vector of type Greed::bullet which had hit the ship.
-	
-	11. int getTotalBulletsHit()
-        	-> returns the number of bullets that had hit the ship
-   
-  	12. Greed::bullet getLastHitBullet()
-		-> returns the last bullet that had hit the ship
-			returns an object Greed::bulllet
-	
-	13. Greed::bullet getLastBulletFired()
-       		->returns the last fired bullet
-	
-	14. void ceaseFire()
-		-> clears the fire buffer
 	
 	15. deque<shipInfo> getShipList()
 		-> returns a list of ships which are in the game
@@ -153,10 +138,14 @@
 	38. bool anchorShip()
 		-> stops the ship movement and clears the path buffer
 	
-	39. bool chaseShip(int s_id)
+	39. bool Greed_chaseShip(int s_id)
 		-> function to chase a ship with ship id=> s_id
 			Note: once you have called this function the ship is transferred to autopilot mode i.e it will take the best routes according to the cost of the tiles set by you in local map,
 			the ship will only stop if it has reached in the radius of target ship, to come out of auto pilot mode call the function anchor ship, this gives you back the navigation controls of the ship
+   		You will get out of the autopilot mode in the following scenarios:
+     		1. You have collided with any object
+       		2. The ship you were chasing was destroyed
+	 	3. You call the function anchorShip()
 
 	40. double getDistance(int s_id)
 		-> returns the eucledian distance between your ship and the ship passed in the function
