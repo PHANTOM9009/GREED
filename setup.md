@@ -1,4 +1,4 @@
-# Steps to setup GREED in your computer:
+# Steps to setup GREED on your computer:
 # Download the pre-compiled binaries from the website.
 
 You can download the game from [AI_PLAYGROUNDS](https://aiplaygrounds.in)
@@ -25,6 +25,7 @@ In order to see your agents perfor in front of you, you need to copy *display pa
 If you have followed every step correctly when you run your algorithm file in visual studio,you must be seeing a message asking to open the game in which mode?
 if you select the option to start without the display unit, then only your algorithm will run but you will not be able to see the game happening. this feature is made if you want to 
 run many clients in a single machine, in that you will only need one display unit, so when you start the last client choose the option to start with display unit.
+if everything goes right, and the server connection is successfull, you should see the prompt asking for username and password.
 
 ## 7. Create your account if you don't have one.
 If you are a first time user, create your account by entering your username, password and all the details asked, you are requested to enter your correct email id's because via these id's we will contact
