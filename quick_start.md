@@ -1,12 +1,4 @@
-# How to play GREED?
-  
-    1. Download the latest release.
-    2. upload the path to visual studio vcvars64.dat file.
-    3. select the number of players playing (you need atleast 2 players to play this game).
-    4. upload the cpp files which contain cpp code that will control your player. if the uploaded file has errors then the user will be prompted to upload the file again.
-       if you don't have your own algorithms, I have included some sample algorithms and a template file for writing algorithms, you will use that template only to write 
-       the algorithm.
-    5. After successful uploading of files, just click on Start game.
+
     
     
 
@@ -126,7 +118,7 @@ Next we see the arguement passed to **void GreedMain(ship &ob)**, ob is the hand
 		deque<shipInfo> shipList = ob.getShipList(); // to get the information about all the ships
 		int index = find_ship_to_kill(shipList, ob);//calling the function to find the target
 		if (index >= 0)
-			ob.chaseShip(index); //instructing your ship to chase the target ship
+			ob.Greed_chaseShip(index); //instructing your ship to chase the target ship
 
 		vector <Greed::cannon> cannonList = ob.getCannonList(); //to get the information about all the cannons in the map
 		for (int j = 0; j < cannonList.size(); j++)//iterating over the list of cannons
@@ -136,7 +128,7 @@ Next we see the arguement passed to **void GreedMain(ship &ob)**, ob is the hand
 			vector<Greed::coords> arr = ob.getRadiusCoords_cannon(j);//this function returns the tiles which are in the radius of the cannon in question
 			for (int i = 0; i < arr.size(); i++)
 			{
-				ob.updateCost(arr[i], 5);//updating costs of all such tiles
+				ob.Greed_updateCost(arr[i], 5);//updating costs of all such tiles
 			}
 		}
 
@@ -156,7 +148,7 @@ Next we see the arguement passed to **void GreedMain(ship &ob)**, ob is the hand
 					* if the previously targetted ship is destroyed we will look for other ship to target
 					*/
 					index = find_ship_to_kill(shipList, ob);
-					ob.chaseShip(index);
+					ob.Greed_chaseShip(index);
 				}
 				if (e.eventType == Event::EventType::ShipCollision)//checking for an active Event
 				{
@@ -179,7 +171,7 @@ Next we see the arguement passed to **void GreedMain(ship &ob)**, ob is the hand
 							/*
 							* if a ship comes in your radius fire!
 							*/
-							ob.fireCannon(cannon::FRONT, q[i].radiusShip.getShipId()[j], ShipSide::FRONT);
+							ob.Greed_fireCannon(cannon::FRONT, q[i].radiusShip.getShipId()[j], ShipSide::FRONT);
 						}
 					}
 					if (q[i].eventType == Event::EventType::CannonsInMyRadius)
@@ -187,7 +179,7 @@ Next we see the arguement passed to **void GreedMain(ship &ob)**, ob is the hand
 						/*
 						* if a cannon comes in your radius Fire!
 						*/
-						ob.fireAtCannon(q[i].radiusCannon.getCannonId()[0], cannon::FRONT);
+						ob.Greed_fireAtCannon(q[i].radiusCannon.getCannonId()[0], cannon::FRONT);
 					}
 
 				}
@@ -195,7 +187,7 @@ Next we see the arguement passed to **void GreedMain(ship &ob)**, ob is the hand
 
 				if (ob.getCurrentAmmo() < 5)//another way to check for resources if you don't want to use Events
 				{
-					ob.upgradeAmmo(10);
+					ob.Greed_upgradeAmmo(10);
 				}
 
 
