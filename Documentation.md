@@ -225,7 +225,7 @@
 		7. int getTargetShipId()
 			-> returns the target ship id
 
-## 4. class Greed::cannon
+## 4. class Greed::cannon_info
 	public functions:
 	
 	1. int getCannonId()
